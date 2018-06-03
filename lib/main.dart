@@ -9,16 +9,18 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'Flutter Demo',
       theme: new ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
-        // counter didn't reset back to zero; the application is not restarted.
-        primarySwatch: Colors.blue,
-      ),
+          // This is the theme of your application.
+          //
+          // Try running your application with "flutter run". You'll see the
+          // application has a blue toolbar. Then, without quitting the app, try
+          // changing the primarySwatch below to Colors.green and then invoke
+          // "hot reload" (press "r" in the console where you ran "flutter run",
+          // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
+          // counter didn't reset back to zero; the application is not restarted.
+          primarySwatch: Colors.blue,
+          backgroundColor: Colors.white,
+          canvasColor: Colors.white,
+          brightness: Brightness.light),
       home: new MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -40,6 +42,17 @@ class MyHomePage extends StatefulWidget {
 
   @override
   _MyHomePageState createState() => new _MyHomePageState();
+}
+
+class TodayButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Row(children: <Widget>[
+      new Text('Today',
+          textAlign: TextAlign.left,
+          style: new TextStyle(color: Colors.redAccent, fontSize: 24.0))
+    ]);
+  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -66,36 +79,24 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return new Scaffold(
       appBar: new AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: new Text(widget.title),
-      ),
-      body: new Center(
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          elevation: 0.0,
+          backgroundColor: Colors.white,
+          textTheme: Theme.of(context).textTheme),
+      body: new Container(
+        margin: const EdgeInsets.all(20.0),
+
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: new Column(
-          // Column is also layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug paint" (press "p" in the console where you ran
-          // "flutter run", or select "Toggle Debug Paint" from the Flutter tool
-          // window in IntelliJ) to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: new ListView(
           children: <Widget>[
             new Text(
-              'You have pushed the button this many times:',
+              'Meditation',
+              textAlign: TextAlign.left,
+              style: new TextStyle(fontWeight: FontWeight.w900, fontSize: 34.0),
             ),
-            new Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
+            new TodayButton()
           ],
         ),
       ),
