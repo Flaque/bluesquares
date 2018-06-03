@@ -1,8 +1,9 @@
 # bluesquares
 
-A new Flutter project.
+An unreleased and unfinished iOS and Android app for keeping track of streaks, habits, and routines.
 
-## Getting Started
+## UI Mockup
 
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+![General UI Mockup](https://i.imgur.com/YO6nk3m.png)
+
+
