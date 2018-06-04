@@ -4,9 +4,9 @@ import '../../Components/TodayButton.dart';
 import '../../Components/EditableHeader.dart';
 
 class StreakScreen extends StatefulWidget {
-  StreakScreen({Key key, this.title}) : super(key: key);
+  StreakScreen({Key key, this.data}) : super(key: key);
 
-  final String title;
+  final String data;
 
   @override
   _StreakScreenState createState() => new _StreakScreenState();
@@ -20,9 +20,7 @@ class _StreakScreenState extends State<StreakScreen> {
         margin: const EdgeInsets.all(20.0),
         child: new ListView(
           children: <Widget>[
-            new EditableHeader(
-              'Meditation',
-            ),
+            new EditableHeader(widget.data),
             new TodayButton()
           ],
         ),

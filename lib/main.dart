@@ -18,8 +18,9 @@ class Routes {
           // "hot reload" (press "r" in the console where you ran "flutter run",
           // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
           // counter didn't reset back to zero; the application is not restarted.
+          accentColor: const Color.fromRGBO(106, 137, 204, 1.0),
           primarySwatch: Colors.blue,
-          backgroundColor: Colors.white,
+          backgroundColor: const Color.fromRGBO(241, 242, 246, 1.0),
           canvasColor: Colors.white,
           brightness: Brightness.light),
       debugShowCheckedModeBanner: false,
