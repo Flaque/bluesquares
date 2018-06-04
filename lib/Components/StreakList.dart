@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'StreakListItem.dart';
+import '../Models/Streak.dart';
 
 class StreakList extends StatelessWidget {
   StreakList({this.streaks, this.onRemove, this.onSelect});
 
-  final List<String> streaks;
+  final List<Streak> streaks;
   final ValueChanged<int> onRemove;
   final ValueChanged<int> onSelect;
   @override

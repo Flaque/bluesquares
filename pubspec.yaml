@@ -5,6 +5,9 @@ dependencies:
 
   json_annotation: ^0.2.3
 
+  shared_preferences: any
+
+  uuid: any
 
   flutter:
     sdk: flutter

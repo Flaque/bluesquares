@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import './StandardBoxShadow.dart';
+import '../Models/Streak.dart';
 
 class StreakListItem extends StatelessWidget {
-  StreakListItem(this.title, this.index, {this.onLongPress, this.onTap});
+  StreakListItem(this.streak, this.index, {this.onLongPress, this.onTap});
 
-  final String title;
+  final Streak streak;
   final int index;
   final ValueChanged<int> onTap;
   final ValueChanged<int> onLongPress;
@@ -31,7 +32,7 @@ class StreakListItem extends StatelessWidget {
                 child: new Container(
                     padding: EdgeInsets.all(20.0),
                     child: new Text(
-                      title,
+                      streak.title,
                       style: new TextStyle(fontSize: 15.0),
                     )))));
   }

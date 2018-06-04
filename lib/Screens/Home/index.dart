@@ -6,6 +6,8 @@ import '../../Components/NothingHere.dart';
 import "../../Components/Header.dart";
 import "../../Components/StreakList.dart";
 import "../../Components/BottomSheetDialog.dart";
+import "../../Models/UserData.dart";
+import "../../Models/Streak.dart";
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -15,16 +17,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // TODO: Remove and replace with saved data.
-  final List<String> streaks = [
-    "Meditate",
-    "Stretch",
-    "Abs 💪",
-    "Running",
-  ];
+  List<Streak> streaks = [];
+
   @override
   void initState() {
     super.initState();
+
+    UserData.load().then((Null) {
+      setState(() {
+        streaks = UserData.getStreaks();
+      });
+    });
   }
 
   void removeStreak(int index) {
@@ -38,8 +41,10 @@ class _HomeScreenState extends State<HomeScreen> {
             secondaryOption: "Nope",
             completed: (bool delete) {
               if (delete) {
-                setState(() {
-                  streaks.removeAt(index);
+                UserData.remove(streaks[index]).then((Null) {
+                  setState(() {
+                    streaks = UserData.getStreaks();
+                  });
                 });
               }
               Navigator.of(context).pop();
@@ -50,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void selectStreak(int index) {
     Navigator.of(context).push(new CustomRoute(
-        builder: (context) => new StreakScreen(data: streaks[index])));
+        builder: (context) => new StreakScreen(streak: streaks[index])));
   }
 
   @override
@@ -60,8 +65,11 @@ class _HomeScreenState extends State<HomeScreen> {
           tooltip: 'Add',
           child: new Icon(Icons.add),
           onPressed: () {
-            Navigator.of(context).push(new CustomRoute(
-                builder: (context) => new StreakScreen(data: "")));
+            Streak streak = new Streak([], "");
+            UserData.add(streak).then((Null) {
+              Navigator.of(context).push(new CustomRoute(
+                  builder: (context) => new StreakScreen(streak: streak)));
+            });
           },
         ),
         body: streaks.isEmpty
