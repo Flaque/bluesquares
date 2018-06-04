@@ -32,7 +32,9 @@ class StreakListItem extends StatelessWidget {
                 child: new Container(
                     padding: EdgeInsets.all(20.0),
                     child: new Text(
-                      streak.title,
+                      streak.title.isNotEmpty
+                          ? streak.title
+                          : "Untitled streak",
                       style: new TextStyle(fontSize: 15.0),
                     )))));
   }
