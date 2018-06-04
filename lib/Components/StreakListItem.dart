@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './StandardBoxShadow.dart';
 
 class StreakListItem extends StatelessWidget {
   StreakListItem(this.title, this.index, {this.onLongPress, this.onTap});
@@ -15,13 +16,8 @@ class StreakListItem extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         decoration: new BoxDecoration(
             color: Colors.white,
-            borderRadius: new BorderRadius.all(new Radius.circular(60.0)),
-            boxShadow: [
-              new BoxShadow(
-                  offset: new Offset(0.0, 2.0),
-                  color: Colors.black12,
-                  blurRadius: 1.0)
-            ]),
+            borderRadius: new BorderRadius.all(new Radius.circular(2.0)),
+            boxShadow: [standardBoxShadow()]),
         child: new Material(
             color: Colors.transparent,
             child: new InkWell(
@@ -31,7 +27,7 @@ class StreakListItem extends StatelessWidget {
                 onLongPress: () {
                   onLongPress(index);
                 },
-                borderRadius: new BorderRadius.all(new Radius.circular(60.0)),
+                borderRadius: new BorderRadius.all(new Radius.circular(2.0)),
                 child: new Container(
                     padding: EdgeInsets.all(20.0),
                     child: new Text(
