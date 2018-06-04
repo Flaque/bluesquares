@@ -10,14 +10,6 @@ class Routes {
     runApp(new MaterialApp(
       title: "Blue Squares",
       theme: new ThemeData(
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
-          // counter didn't reset back to zero; the application is not restarted.
           accentColor: const Color.fromRGBO(106, 137, 204, 1.0),
           primarySwatch: Colors.blue,
           backgroundColor: const Color.fromRGBO(241, 242, 246, 1.0),
@@ -47,6 +39,6 @@ class CustomRoute<T> extends MaterialPageRoute<T> {
   Widget buildTransitions(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
     if (settings.isInitialRoute) return child;
-    return new FadeTransition(opacity: animation, child: child);
+    return child;
   }
 }
