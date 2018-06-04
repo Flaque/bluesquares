@@ -8,11 +8,11 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      margin: const EdgeInsetsDirectional.only(bottom: 24.0)
+        margin: const EdgeInsetsDirectional.only(bottom: 24.0),
         child: new Text(
-      this.data,
-      textAlign: TextAlign.left,
-      style: new TextStyle(fontWeight: FontWeight.w900, fontSize: 34.0),
-    ));
+          this.data,
+          textAlign: TextAlign.left,
+          style: new TextStyle(fontWeight: FontWeight.w900, fontSize: 34.0),
+        ));
   }
 }
