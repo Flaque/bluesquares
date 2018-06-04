@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Components/TodayButton.dart';
+import '../../Components/Header.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key, this.title}) : super(key: key);
@@ -56,10 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
         // in the middle of the parent.
         child: new ListView(
           children: <Widget>[
-            new Text(
+            new Header(
               'Meditation',
-              textAlign: TextAlign.left,
-              style: new TextStyle(fontWeight: FontWeight.w900, fontSize: 34.0),
             ),
             new TodayButton()
           ],
