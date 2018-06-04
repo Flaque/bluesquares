@@ -46,10 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: new ListView(children: <Widget>[
                   new Stack(
                     children: <Widget>[
-                      new Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 30.0),
-                          child: new Header("Streaks")),
+                      new StreaksHeader(),
                       new Container(
                           margin: EdgeInsets.only(top: 80.0),
                           child: new Stack(
@@ -89,5 +86,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   )
                 ])));
+  }
+}
+
+class StreaksHeader extends StatelessWidget {
+  const StreaksHeader({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return new Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+        child: new Header("Streaks"));
   }
 }
