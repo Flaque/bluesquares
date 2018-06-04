@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Components/TodayButton.dart';
+import '../../Components/ReturnButton.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key, this.title}) : super(key: key);
@@ -43,12 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return new Scaffold(
-      appBar: new AppBar(
-          // Here we take the value from the MyHomeScreen object that was created by
-          // the App.build method, and use it to set our appbar title.
-          elevation: 0.0,
-          backgroundColor: Colors.white,
-          textTheme: Theme.of(context).textTheme),
       body: new Container(
         margin: const EdgeInsets.all(20.0),
 
@@ -56,6 +51,11 @@ class _HomeScreenState extends State<HomeScreen> {
         // in the middle of the parent.
         child: new ListView(
           children: <Widget>[
+            new ReturnButton(
+              onPressed: () {
+                if (Navigator.canPop(context)) Navigator.pop(context);
+              },
+            ),
             new Text(
               'Meditation',
               textAlign: TextAlign.left,
