@@ -16,14 +16,29 @@ class _HeatmapState extends State<Heatmap> {
 
   @override
   Widget build(BuildContext context) {
-    return new Table(children: new List.generate(MAX_WEEKS_IN_A_MONTH, row));
+    return new ListView(
+      children: <Widget>[
+        new Column(
+            children: new List.generate(
+                MAX_WEEKS_IN_A_MONTH, (index) => row(index, context)))
+      ],
+    );
   }
 
-  TableRow row(index) {
-    return new TableRow(children: new List.generate(DAYS_IN_A_WEEK, block));
+  Row row(index, context) {
+    return new Row(
+        children: new List.generate(
+            DAYS_IN_A_WEEK, (index) => block(index, DAYS_IN_A_WEEK, context)));
   }
 
-  Widget block(index) {
-    return new Expanded(child: new Placeholder());
+  Widget block(index, length, context) {
+    // Maybe save and reference it since it is always the same
+    double width = MediaQuery.of(context).size.width / length;
+    return new Container(
+      width: width,
+      height: width,
+      padding: new EdgeInsets.all(5.0),
+      child: new Container(decoration: new BoxDecoration(color: Colors.blue)),
+    );
   }
 }
