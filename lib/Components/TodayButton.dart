@@ -4,11 +4,14 @@ import './FixedSideLayout.dart';
 class TodayButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new FixedSideLayout(new Today(), new StreakButton());
+    return new FixedSideLayout(
+        new Today(), new StreakButton(), StreakButton.HEIGHT);
   }
 }
 
 class StreakButton extends StatelessWidget {
+  static const HEIGHT = 88.0;
+
   const StreakButton({
     Key key,
   }) : super(key: key);
@@ -16,7 +19,7 @@ class StreakButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
-        height: FixedSideLayout.HEIGHT,
+        height: HEIGHT,
         child: new RaisedButton(
           color: Colors.blue,
           onPressed: () => {},

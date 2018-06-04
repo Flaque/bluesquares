@@ -27,7 +27,7 @@ class _StreakScreenState extends State<StreakScreen> {
   Widget build(BuildContext context) {
     return new Scaffold(
         body: new Container(
-            margin: const EdgeInsets.all(20.0), child: buildListView()));
+            margin: const EdgeInsets.all(24.0), child: buildListView()));
   }
 
   ListView buildListView() {
@@ -36,9 +36,10 @@ class _StreakScreenState extends State<StreakScreen> {
         new EditableHeader(widget.streak.title, onChanged: updateTitle),
         new TodayButton(),
         new FixedSideLayout(
-            new Text("Hey",
+            new Text("June",
                 textAlign: TextAlign.start, style: TextStyles.standardLabel()),
-            new Heatmap())
+            new Container(height: 280.0, child: Heatmap()),
+            280.0)
       ],
     );
   }

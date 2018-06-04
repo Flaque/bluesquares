@@ -11,13 +11,13 @@ class Heatmap extends StatefulWidget {
 
 class _HeatmapState extends State<Heatmap> {
   int days;
+  static const BASE_PADDING = 5.0;
 
   _HeatmapState(this.days);
 
   @override
   Widget build(BuildContext context) {
     return new Container(
-        margin: new EdgeInsets.only(top: 24.0),
         child: new Center(
             child: new Column(
                 children: new List.generate(
@@ -31,10 +31,9 @@ class _HeatmapState extends State<Heatmap> {
   }
 
   Widget block(index, length, context) {
-    const BASE_PADDING = 5.0;
     return new Expanded(
       child: new Container(
-          height: 30.0,
+          height: 25.0,
           margin: new EdgeInsets.all(BASE_PADDING),
           decoration: new BoxDecoration(color: Colors.blue)),
     );
