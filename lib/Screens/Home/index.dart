@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import "../Streak/index.dart";
 import "../../main.dart";
 import '../../Components/NothingHere.dart';
-import "../../Components/StreakListItem.dart";
 import "../../Components/Header.dart";
+import "../../Components/StreakList.dart";
 import "../../Components/BottomSheetDialog.dart";
+import "../../Models/UserData.dart";
+import "../../Models/Streak.dart";
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -15,16 +17,45 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // TODO: Remove and replace with saved data.
-  final List<String> streaks = [
-    "Meditate",
-    "Stretch",
-    "Abs 💪",
-    "Running",
-  ];
+  List<Streak> streaks = [];
+
   @override
   void initState() {
     super.initState();
+
+    UserData.load().then((Null) {
+      setState(() {
+        streaks = UserData.getStreaks();
+      });
+    });
+  }
+
+  void removeStreak(int index) {
+    showModalBottomSheet(
+        context: context,
+        builder: (builder) {
+          return new BottomSheetDialog(
+            title:
+                "Are you sure you want to delete '${index < streaks.length ? streaks[index] : ""}'?",
+            primaryOption: "Delete",
+            secondaryOption: "Nope",
+            completed: (bool delete) {
+              if (delete) {
+                UserData.remove(streaks[index]).then((Null) {
+                  setState(() {
+                    streaks = UserData.getStreaks();
+                  });
+                });
+              }
+              Navigator.of(context).pop();
+            },
+          );
+        });
+  }
+
+  void selectStreak(int index) {
+    Navigator.of(context).push(new CustomRoute(
+        builder: (context) => new StreakScreen(streak: streaks[index])));
   }
 
   @override
@@ -34,8 +65,11 @@ class _HomeScreenState extends State<HomeScreen> {
           tooltip: 'Add',
           child: new Icon(Icons.add),
           onPressed: () {
-            Navigator.of(context).push(new CustomRoute(
-                builder: (context) => new StreakScreen(data: "")));
+            Streak streak = new Streak([], "");
+            UserData.add(streak).then((Null) {
+              Navigator.of(context).push(new CustomRoute(
+                  builder: (context) => new StreakScreen(streak: streak)));
+            });
           },
         ),
         body: streaks.isEmpty
@@ -47,42 +81,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   new Stack(
                     children: <Widget>[
                       new StreaksHeader(),
-                      new Container(
-                          margin: EdgeInsets.only(top: 80.0),
-                          child: new Stack(
-                              children: List.generate(streaks.length, (index) {
-                            return new Container(
-                                margin: EdgeInsets.only(top: index * 80.0),
-                                child: StreakListItem(
-                                  streaks[index],
-                                  index,
-                                  onTap: (int index) {
-                                    Navigator.of(context).push(new CustomRoute(
-                                        builder: (context) => new StreakScreen(
-                                            data: streaks[index])));
-                                  },
-                                  onLongPress: (int index) {
-                                    showModalBottomSheet(
-                                        context: context,
-                                        builder: (builder) {
-                                          return new BottomSheetDialog(
-                                            title:
-                                                "Are you sure you want to delete '${index < streaks.length ? streaks[index] : ""}'?",
-                                            primaryOption: "Delete",
-                                            secondaryOption: "Nope",
-                                            completed: (bool delete) {
-                                              if (delete) {
-                                                setState(() {
-                                                  streaks.removeAt(index);
-                                                });
-                                              }
-                                              Navigator.of(context).pop();
-                                            },
-                                          );
-                                        });
-                                  },
-                                ));
-                          })))
+                      new StreakList(
+                        streaks: streaks,
+                        onRemove: removeStreak,
+                        onSelect: selectStreak,
+                      ),
                     ],
                   )
                 ])));

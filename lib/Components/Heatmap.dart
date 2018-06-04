@@ -16,13 +16,12 @@ class _HeatmapState extends State<Heatmap> {
 
   @override
   Widget build(BuildContext context) {
-    return new ListView(
-      children: <Widget>[
-        new Column(
-            children: new List.generate(
-                MAX_WEEKS_IN_A_MONTH, (index) => row(index, context)))
-      ],
-    );
+    return new Container(
+        margin: new EdgeInsets.only(top: 24.0),
+        child: new Center(
+            child: new Column(
+                children: new List.generate(
+                    MAX_WEEKS_IN_A_MONTH, (index) => row(index, context)))));
   }
 
   Row row(index, context) {
@@ -32,13 +31,12 @@ class _HeatmapState extends State<Heatmap> {
   }
 
   Widget block(index, length, context) {
-    // Maybe save and reference it since it is always the same
-    double width = MediaQuery.of(context).size.width / length;
-    return new Container(
-      width: width,
-      height: width,
-      padding: new EdgeInsets.all(5.0),
-      child: new Container(decoration: new BoxDecoration(color: Colors.blue)),
+    const BASE_PADDING = 5.0;
+    return new Expanded(
+      child: new Container(
+          height: 30.0,
+          margin: new EdgeInsets.all(BASE_PADDING),
+          decoration: new BoxDecoration(color: Colors.blue)),
     );
   }
 }

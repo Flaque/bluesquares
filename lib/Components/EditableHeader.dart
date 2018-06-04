@@ -4,8 +4,9 @@ import 'EditableTitle.dart';
 import 'ReturnButton.dart';
 
 class EditableHeader extends StatelessWidget {
-  EditableHeader(this.data);
+  EditableHeader(this.data, {this.onChanged});
   final String data;
+  final ValueChanged<String> onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class EditableHeader extends StatelessWidget {
                   Navigator.pop(context);
                 })
               : new Container(),
-          new EditableTitle(data: data, onChanged: (value) {})
+          new EditableTitle(data: data, onChanged: onChanged)
         ]);
   }
 }
