@@ -19,15 +19,17 @@ class FixedSideLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Row(children: <Widget>[
-      new Container(
-          width: FIXED_WIDTH,
-          alignment: Alignment.topLeft,
-          child: new Container(
+    return new Container(
+        margin: new EdgeInsets.only(bottom: 24.0),
+        child: new Row(children: <Widget>[
+          new Container(
+              width: FIXED_WIDTH,
               alignment: Alignment.topLeft,
-              height: this.height,
-              child: this.fixed)),
-      new Expanded(child: this.expanded)
-    ]);
+              child: new Container(
+                  alignment: Alignment.topLeft,
+                  height: this.height,
+                  child: this.fixed)),
+          new Expanded(child: this.expanded)
+        ]));
   }
 }

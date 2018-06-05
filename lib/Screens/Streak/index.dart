@@ -35,12 +35,23 @@ class _StreakScreenState extends State<StreakScreen> {
       children: <Widget>[
         new EditableHeader(widget.streak.title, onChanged: updateTitle),
         new TodayButton(),
-        new FixedSideLayout(
-            new Text("June",
-                textAlign: TextAlign.start, style: TextStyles.standardLabel()),
-            new Container(height: 280.0, child: Heatmap()),
-            280.0)
+        new MonthHeatmap("June"),
       ],
     );
+  }
+}
+
+class MonthHeatmap extends StatelessWidget {
+  final String month;
+
+  const MonthHeatmap(this.month);
+
+  @override
+  Widget build(BuildContext context) {
+    return new FixedSideLayout(
+        new Text(month,
+            textAlign: TextAlign.start, style: TextStyles.standardLabel()),
+        new Container(height: 180.0, child: Heatmap()),
+        180.0);
   }
 }
