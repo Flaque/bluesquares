@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Screens/Home/index.dart';
+import './theme.dart';
 
 void main() {
   new Routes();
@@ -9,12 +10,7 @@ class Routes {
   Routes() {
     runApp(new MaterialApp(
       title: "Blue Squares",
-      theme: new ThemeData(
-          accentColor: const Color.fromRGBO(106, 137, 204, 1.0),
-          primarySwatch: Colors.blue,
-          backgroundColor: const Color.fromRGBO(241, 242, 246, 1.0),
-          canvasColor: Colors.white,
-          brightness: Brightness.light),
+      theme: BlueSquaresTheme.data,
       debugShowCheckedModeBanner: false,
       home: new HomeScreen(),
       onGenerateRoute: (RouteSettings settings) {

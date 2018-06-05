@@ -17,6 +17,7 @@ class StreakListItem extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         decoration: new BoxDecoration(
             color: Colors.white,
+            border: new Border.all(color: new Color(0x220c2461)),
             borderRadius: new BorderRadius.all(new Radius.circular(2.0)),
             boxShadow: [standardBoxShadow()]),
         child: new Material(

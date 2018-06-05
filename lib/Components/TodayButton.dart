@@ -21,7 +21,7 @@ class StreakButton extends StatelessWidget {
     return new Container(
         height: HEIGHT,
         child: new RaisedButton(
-          color: Colors.blue,
+          color: Theme.of(context).accentColor,
           onPressed: () => {},
         ));
   }
