@@ -15,18 +15,19 @@ class StreakList extends StatelessWidget {
     return new Container(
         height: streaks.length * 100.0 + 30,
         margin: EdgeInsets.all(10.0),
-        child: new Stack(
-            overflow: Overflow.visible,
-            children: List.generate(streaks.length, (index) {
-              int reversedIndex = streaks.length - index - 1;
-              return new Positioned(
-                  top: 100.0 * reversedIndex,
-                  child: new StreakListItem(
-                    streaks[reversedIndex],
-                    index,
-                    onTap: onSelect,
-                    onRemove: onRemove,
-                  ));
-            })));
+        child: new LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+          return new Stack(
+              overflow: Overflow.clip,
+              children: List.generate(streaks.length, (index) {
+                int reversedIndex = streaks.length - index - 1;
+                return new Positioned(
+                    top: 100.0 * reversedIndex,
+                    child: new StreakListItem(streaks[reversedIndex], index,
+                        onTap: onSelect,
+                        onRemove: onRemove,
+                        width: constraints.maxWidth));
+              }));
+        }));
   }
 }

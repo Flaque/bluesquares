@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import '../Models/Streak.dart';
 
 class StreakListItem extends StatefulWidget {
-  StreakListItem(this.streak, this.index, {this.onRemove, this.onTap});
+  StreakListItem(this.streak, this.index,
+      {this.onRemove, this.onTap, this.width});
 
   final Streak streak;
   final int index;
   final ValueChanged<int> onTap;
   final ValueChanged<int> onRemove;
+  final double width;
 
   _StreakListItemState createState() => new _StreakListItemState(index, streak);
 }
@@ -51,25 +53,24 @@ class _StreakListItemState extends State<StreakListItem>
     });
 
     return new GestureDetector(
-      onHorizontalDragUpdate: (data) {
-        // we can access context.size here
-        setState(() {
-          _controller.value -= data.primaryDelta / context.size.width;
-        });
-      },
-      onHorizontalDragEnd: (data) {
-        if (data.primaryVelocity > 500)
-          _controller
-              .animateTo(.0); //close menu on fast swipe in the right direction
-        else if (_controller.value >= 0.5 ||
-            data.primaryVelocity <
-                -500) // fully open if dragged a lot to left or on fast swipe to left
-          _controller.animateTo(1.0);
-        else // close if none of above
-          _controller.animateTo(.0);
-      },
-      child: new Stack(
-        children: <Widget>[
+        onHorizontalDragUpdate: (data) {
+          // we can access context.size here
+          setState(() {
+            _controller.value -= data.primaryDelta / context.size.width;
+          });
+        },
+        onHorizontalDragEnd: (data) {
+          if (data.primaryVelocity > 500)
+            _controller.animateTo(
+                .0); //close menu on fast swipe in the right direction
+          else if (_controller.value >= 0.5 ||
+              data.primaryVelocity <
+                  -500) // fully open if dragged a lot to left or on fast swipe to left
+            _controller.animateTo(1.0);
+          else // close if none of above
+            _controller.animateTo(.0);
+        },
+        child: new Stack(children: <Widget>[
           new Positioned(
               right: 0.0,
               child: new Container(
@@ -87,8 +88,8 @@ class _StreakListItemState extends State<StreakListItem>
           new SlideTransition(
               position: animation,
               child: new Container(
-                  width: MediaQuery.of(context).size.width,
                   height: 100.0,
+                  width: widget.width,
                   decoration: new BoxDecoration(
                       color: Colors.white,
                       boxShadow: [
@@ -113,13 +114,10 @@ class _StreakListItemState extends State<StreakListItem>
                           child: new Container(
                               padding: EdgeInsets.all(30.0),
                               child: new Text(
-                                widget.streak.title.isNotEmpty
-                                    ? widget.streak.title
-                                    : "Untitled streak",
-                                style: new TextStyle(fontSize: 15.0),
-                              )))))),
-        ],
-      ),
-    );
+                                  widget.streak.title.isNotEmpty
+                                      ? widget.streak.title
+                                      : "Untitled streak",
+                                  style: new TextStyle(fontSize: 15.0)))))))
+        ]));
   }
 }
