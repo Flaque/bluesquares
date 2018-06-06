@@ -4,7 +4,8 @@ import 'StreakListItem.dart';
 import '../Models/Streak.dart';
 
 class StreakList extends StatelessWidget {
-  StreakList({this.streaks, this.onRemove, this.onSelect});
+  StreakList({List<Streak> streaks, this.onRemove, this.onSelect})
+      : this.streaks = streaks.reversed.toList();
 
   final List<Streak> streaks;
   final ValueChanged<int> onRemove;
@@ -12,17 +13,21 @@ class StreakList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
-        margin: EdgeInsets.only(top: 80.0),
+        height: streaks.length * 100.0 + 30,
+        // decoration: new BoxDecoration(color: Colors.blue),
+        margin: EdgeInsets.all(10.0),
         child: new Stack(
+            overflow: Overflow.visible,
             children: List.generate(streaks.length, (index) {
-          return new Container(
-              margin: EdgeInsets.only(top: index * 80.0),
-              child: StreakListItem(
-                streaks[index],
-                index,
-                onTap: onSelect,
-                onLongPress: onRemove,
-              ));
-        })));
+              int reversedIndex = streaks.length - index - 1;
+              return new Positioned(
+                  top: 100.0 * reversedIndex,
+                  child: new StreakListItem(
+                    streaks[index],
+                    index,
+                    onTap: onSelect,
+                    onRemove: onRemove,
+                  ));
+            })));
   }
 }

@@ -78,7 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 decoration:
                     new BoxDecoration(color: Theme.of(context).backgroundColor),
                 child: new ListView(children: <Widget>[
-                  new Stack(
+                  new Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       new StreaksHeader(),
                       new StreakList(
