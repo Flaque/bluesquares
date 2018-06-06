@@ -23,6 +23,13 @@ class _StreakScreenState extends State<StreakScreen> {
     UserData.update(widget.streak);
   }
 
+  void incrementStreak() {
+    setState(() {
+      widget.streak.increment();
+      UserData.update(widget.streak);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -34,24 +41,36 @@ class _StreakScreenState extends State<StreakScreen> {
     return new ListView(
       children: <Widget>[
         new EditableHeader(widget.streak.title, onChanged: updateTitle),
-        new TodayButton(),
-        new MonthHeatmap("June"),
+        new TodayButton(onPressed: incrementStreak),
+        new MonthHeatmapList(widget.streak.generateMonths()),
       ],
     );
   }
 }
 
-class MonthHeatmap extends StatelessWidget {
-  final String month;
+class MonthHeatmapList extends StatelessWidget {
+  MonthHeatmapList(this.months);
 
+  final List<Month> months;
+
+  @override
+  Widget build(BuildContext context) {
+    return new Column(
+        children: List.generate(
+            months.length, (int index) => new MonthHeatmap(months[index])));
+  }
+}
+
+class MonthHeatmap extends StatelessWidget {
   const MonthHeatmap(this.month);
+
+  final Month month;
 
   @override
   Widget build(BuildContext context) {
     return new FixedSideLayout(
-        new Text(month,
+        new Text(month.name,
             textAlign: TextAlign.start, style: TextStyles.standardLabel()),
-        new Container(height: 180.0, child: Heatmap()),
-        180.0);
+        new Container(child: Heatmap(month.days)));
   }
 }
