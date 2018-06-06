@@ -14,7 +14,6 @@ class StreakList extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Container(
         height: streaks.length * 100.0 + 30,
-        // decoration: new BoxDecoration(color: Colors.blue),
         margin: EdgeInsets.all(10.0),
         child: new Stack(
             overflow: Overflow.visible,
@@ -23,7 +22,7 @@ class StreakList extends StatelessWidget {
               return new Positioned(
                   top: 100.0 * reversedIndex,
                   child: new StreakListItem(
-                    streaks[index],
+                    streaks[reversedIndex],
                     index,
                     onTap: onSelect,
                     onRemove: onRemove,

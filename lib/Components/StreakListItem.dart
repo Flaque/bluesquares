@@ -79,6 +79,9 @@ class _StreakListItemState extends State<StreakListItem>
                   child: new IconButton(
                       icon: new Icon(Icons.delete),
                       onPressed: () {
+                        setState(() {
+                          _controller.reverse();
+                        });
                         widget.onRemove(widget.index);
                       }))),
           new SlideTransition(
@@ -99,7 +102,12 @@ class _StreakListItemState extends State<StreakListItem>
                   child: new Material(
                       color: Colors.transparent,
                       child: new InkWell(
-                          onTap: () => widget.onTap(widget.index),
+                          onTap: () {
+                            setState(() {
+                              _controller.reverse();
+                            });
+                            widget.onTap(widget.index);
+                          },
                           borderRadius:
                               new BorderRadius.all(new Radius.circular(20.0)),
                           child: new Container(
