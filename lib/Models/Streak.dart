@@ -19,9 +19,18 @@ class Streak extends Object with _$StreakSerializerMixin {
     return (a.day == b.day && a.month == b.month && a.year == b.year);
   }
 
+  int _todayIndex() {
+    return days.indexWhere((day) => _sameDay(new DateTime.now(), day.date));
+  }
+
+  int amountToday() {
+    int index = _todayIndex();
+
+    return index != -1 ? days[index].amount : 0;
+  }
+
   void increment() {
-    int index =
-        days.indexWhere((day) => _sameDay(new DateTime.now(), day.date));
+    int index = _todayIndex();
     if (index != -1) {
       days[index].amount++;
     } else {

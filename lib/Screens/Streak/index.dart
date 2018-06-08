@@ -41,7 +41,9 @@ class _StreakScreenState extends State<StreakScreen> {
     return new ListView(
       children: <Widget>[
         new EditableHeader(widget.streak.title, onChanged: updateTitle),
-        new TodayButton(onPressed: incrementStreak),
+        new TodayButton(
+            onPressed: incrementStreak,
+            amountToday: widget.streak.amountToday()),
         new MonthHeatmapList(widget.streak.generateMonths()),
       ],
     );

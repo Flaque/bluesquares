@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import './FixedSideLayout.dart';
+import './TextStyles.dart';
 
 class TodayButton extends StatelessWidget {
-  TodayButton({this.onPressed});
+  TodayButton({this.onPressed, this.amountToday});
 
   final VoidCallback onPressed;
+  final int amountToday;
 
   @override
   Widget build(BuildContext context) {
     return new FixedSideLayout(
-        new Today(), new StreakButton(onPressed: onPressed));
+        new Today(),
+        new StreakButton(
+          onPressed: onPressed,
+          amountToday: amountToday,
+        ));
   }
 }
 
@@ -18,19 +24,22 @@ class StreakButton extends StatelessWidget {
 
   const StreakButton({
     this.onPressed,
+    this.amountToday,
     Key key,
   }) : super(key: key);
 
   final VoidCallback onPressed;
+  final int amountToday;
 
   @override
   Widget build(BuildContext context) {
     return new Container(
         height: HEIGHT,
         child: new RaisedButton(
-          color: Theme.of(context).accentColor,
-          onPressed: onPressed,
-        ));
+            color: Theme.of(context).accentColor,
+            onPressed: onPressed,
+            child: new Text(this.amountToday.toString(),
+                style: TextStyles.whiteLabel())));
   }
 }
 

@@ -14,6 +14,10 @@ class TextStyles {
     return _label(Colors.red);
   }
 
+  static TextStyle whiteLabel() {
+    return _label(Colors.white);
+  }
+
   static TextStyle header() {
     return new TextStyle(
         fontWeight: FontWeight.w700, fontSize: 34.0, color: Colors.black);
