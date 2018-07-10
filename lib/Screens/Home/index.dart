@@ -34,22 +34,24 @@ class _HomeScreenState extends State<HomeScreen> {
     showModalBottomSheet(
         context: context,
         builder: (builder) {
-          return new BottomSheetDialog(
-            title:
-                "Are you sure you want to delete '${index < streaks.length ? streaks[index] : ""}'?",
-            primaryOption: "Delete",
-            secondaryOption: "Nope",
-            completed: (bool delete) {
-              if (delete) {
-                UserData.remove(streaks[index]).then((Null) {
-                  setState(() {
-                    streaks = UserData.getStreaks();
-                  });
-                });
-              }
-              Navigator.of(context).pop();
-            },
-          );
+          return new Padding(
+              padding: EdgeInsets.all(20.0),
+              child: new BottomSheetDialog(
+                title:
+                    "Are you sure you want to delete '${index < streaks.length ? streaks[index] : ""}'?",
+                primaryOption: "Delete",
+                secondaryOption: "Nope",
+                completed: (bool delete) {
+                  if (delete) {
+                    UserData.remove(streaks[index]).then((Null) {
+                      setState(() {
+                        streaks = UserData.getStreaks();
+                      });
+                    });
+                  }
+                  Navigator.of(context).pop();
+                },
+              ));
         });
   }
 
